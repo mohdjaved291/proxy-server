@@ -3,8 +3,9 @@ import axios, { AxiosResponseHeaders, RawAxiosResponseHeaders } from 'axios';
 /**
  * Base URL for the proxy server
  * All requests will be made relative to this URL
+ * Uses environment variable VITE_API_URL if available, falls back to localhost for development
  */
-const PROXY_BASE_URL = 'http://localhost:8080';
+const PROXY_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080';
 
 /**
  * Represents possible types of response data from the proxy

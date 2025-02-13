@@ -57,7 +57,8 @@ export const StatusBar: React.FC<StatusBarProps> = ({
      */
     const checkServerStatus = useCallback(async () => {
         try {
-            const response = await fetch(`http://localhost:${port}/status`, {
+            const baseUrl = import.meta.env.VITE_API_URL || `http://localhost:${port}`;
+            const response = await fetch(`${baseUrl}/status`, {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',
