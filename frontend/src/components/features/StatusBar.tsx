@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Card } from '../UI/Card';
 import { Status } from '../../types/common';
+import config from '../../config';
 
 /**
  * Props interface for the StatusBar component
@@ -11,7 +12,6 @@ import { Status } from '../../types/common';
  */
 interface StatusBarProps {
     status?: Status;
-    port: number;
     isConnected?: boolean;
 }
 
@@ -44,7 +44,6 @@ const StatusIndicator = ({ isConnected }: { isConnected: boolean }) => (
  * @returns {JSX.Element} Rendered status bar
  */
 export const StatusBar: React.FC<StatusBarProps> = ({
-    port,
     isConnected: externalIsConnected
 }) => {
     // Track the connection state of the proxy server
@@ -57,8 +56,7 @@ export const StatusBar: React.FC<StatusBarProps> = ({
      */
     const checkServerStatus = useCallback(async () => {
         try {
-            const baseUrl = import.meta.env.VITE_API_URL || `http://localhost:${port}`;
-            const response = await fetch(`${baseUrl}/status`, {
+            const response = await fetch(`${config.PROXY_BASE_URL}/status`, {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',
@@ -69,7 +67,7 @@ export const StatusBar: React.FC<StatusBarProps> = ({
             setIsConnected(false);
             console.error('Server check failed:', error);
         }
-    }, [port]);
+    }, []);
 
     /**
      * Effect hook to handle server status monitoring
@@ -82,6 +80,9 @@ export const StatusBar: React.FC<StatusBarProps> = ({
         const interval = setInterval(checkServerStatus, 5000);
         return () => clearInterval(interval);
     }, [checkServerStatus]);
+
+    // Extract port from URL for display
+    const port = new URL(config.PROXY_BASE_URL).port || '443';
 
     return (
         <Card className="!p-4">

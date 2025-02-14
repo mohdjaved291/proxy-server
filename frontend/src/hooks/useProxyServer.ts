@@ -3,6 +3,7 @@ import { CacheStats } from '../types/cache';
 import { RequestEntry, Status } from '../types/common';
 import { makeProxyRequest } from '../services/proxyService';
 import { cacheStorage } from '../services/cacheStorage';
+import config from '../config';
 
 /**
  * Custom hook for managing proxy server state and operations
@@ -86,8 +87,8 @@ export const useProxyServer = () => {
             updateRequestHistory(url, 'Cache Miss');
             setStatus('success');
 
-            // Open proxied URL in new tab
-            const proxyUrl = `http://localhost:8080/proxy?targetUrl=${encodeURIComponent(formatUrl(url))}`;
+            // Use the configured proxy URL
+            const proxyUrl = `${config.PROXY_BASE_URL}/proxy?targetUrl=${encodeURIComponent(formatUrl(url))}`;
             window.open(proxyUrl, '_blank');
 
         } catch (err) {

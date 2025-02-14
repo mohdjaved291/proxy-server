@@ -1,11 +1,6 @@
 import axios, { AxiosResponseHeaders, RawAxiosResponseHeaders } from 'axios';
+import config from '../config';
 
-/**
- * Base URL for the proxy server
- * All requests will be made relative to this URL
- * Uses environment variable VITE_API_URL if available, falls back to localhost for development
- */
-const PROXY_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080';
 
 /**
  * Represents possible types of response data from the proxy
@@ -43,7 +38,7 @@ interface ProxyResponse {
  */
 
 const axiosInstance = axios.create({
-    baseURL: PROXY_BASE_URL,
+    baseURL: config.PROXY_BASE_URL,
     timeout: 30000, // 30 second timeout
     validateStatus: (status) => status >= 200 && status < 600 // Accept wider range of status codes
 });
