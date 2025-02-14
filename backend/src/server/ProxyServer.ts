@@ -73,7 +73,7 @@ export class ProxyServer extends EventEmitter {
     private async handleRequest(clientReq: http.IncomingMessage, clientRes: http.ServerResponse): Promise<void> {
         // Define CORS headers for all responses
         const corsHeaders: Record<string, string> = {
-            'Access-Control-Allow-Origin': 'http://localhost:5173',
+            'Access-Control-Allow-Origin': 'https://proxy-server-frontend.onrender.com',
             'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS',
             'Access-Control-Allow-Headers': 'Accept, Content-Type, Origin',
             'Access-Control-Expose-Headers': 'X-Cache, X-Cache-Lookup',
@@ -286,7 +286,7 @@ export class ProxyServer extends EventEmitter {
      */
     private getTargetUrl(reqUrl: string): string {
         try {
-            const parsedUrl = new URL(reqUrl, `http://localhost:${this.port}`);
+            const parsedUrl = new URL(reqUrl, 'https://proxy-server-frontend.onrender.com');
             const targetUrl = parsedUrl.searchParams.get('targetUrl');
 
             if (!targetUrl) {
