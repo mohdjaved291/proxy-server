@@ -38,10 +38,7 @@ export const UnifiedProxyComponent = () => {
             <div className="container max-w-3xl mx-auto px-4">
                 <div className="grid gap-8">
                     {/* Status Bar - Displays current connection status */}
-                    <StatusBar
-                        status={status}
-                        port={8080}
-                    />
+                    <StatusBar />
 
                     {/* Proxy Form - Handles URL input and submission */}
                     <ProxyForm
