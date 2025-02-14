@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Card } from '../UI/Card';
-import { Status } from '../../types/common';
 import config from '../../config';
 
 /**
@@ -11,7 +10,6 @@ import config from '../../config';
  * @property {boolean} [isConnected] - Optional prop to override the connection state
  */
 interface StatusBarProps {
-    status?: Status;
     isConnected?: boolean;
 }
 
