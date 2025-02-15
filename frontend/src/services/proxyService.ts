@@ -40,7 +40,13 @@ interface ProxyResponse {
 const axiosInstance = axios.create({
     baseURL: config.PROXY_BASE_URL,
     timeout: 30000, // 30 second timeout
-    validateStatus: (status) => status >= 200 && status < 600 // Accept wider range of status codes
+    validateStatus: (status) => status >= 200 && status < 600, // Accept wider range of status codes
+    // Add error handling for connection issues
+    maxRedirects: 5,
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+    }
 });
 
 export const proxyService = {
