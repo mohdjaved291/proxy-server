@@ -37,11 +37,7 @@ export const UnifiedProxyComponent = () => {
         <div className="min-h-screen bg-gray-50 py-8">
             <div className="container max-w-3xl mx-auto px-4">
                 <div className="grid gap-8">
-<<<<<<< HEAD
-                    {/* Status Bar - Only pass status prop */}
-=======
                     {/* Status Bar - Displays current connection status */}
->>>>>>> 29b5e22240c90c48496c2d5e550600e7ebf2fe0d
                     <StatusBar />
 
                     {/* Proxy Form - Handles URL input and submission */}
